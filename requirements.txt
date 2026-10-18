@@ -1,0 +1,18 @@
+fastapi
+uvicorn
+python-multipart
+pydantic
+requests
+pillow
+edge-tts
+mammoth
+python-docx
+pdf2docx
+rapidocr-onnxruntime
+faster-whisper
+nvidia-cublas-cu12; sys_platform == "win32"
+nvidia-cudnn-cu12; sys_platform == "win32"
+av==18.1.0
+pytest
+httpx
+pywebview

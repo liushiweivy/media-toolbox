@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>媒体工具箱</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/static/styles.css?v=20261018d">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <h1>媒 体 工 具 箱</h1>
+    <p class="sub">音视频 · 文档 · 文字 一站式处理</p>
+    <span class="engine" id="engine">引擎自检中…</span>
+  </header>
+
+  <main class="grid" id="grid">
+
+    <!-- 1 视频提取音频 -->
+    <section class="card" data-kind="extract-audio">
+      <h2><span class="ico">🎬</span>视频提取音频</h2>
+      <p class="desc">从视频（或音频）中剥离音轨，导出 MP3 / M4A。</p>
+      <div class="drop" data-accept="video/*,audio/*">点击或拖入视频/音频文件<span class="fname"></span></div>
+      <div class="opts">
+        <label>格式 <select data-opt="fmt"><option value="mp3">MP3</option><option value="m4a">M4A</option></select></label>
+      </div>
+      <button class="btn run" disabled>开始提取</button>
+      <div class="prog"><div class="bar"><i></i></div><div class="pmsg"></div></div>
+      <div class="result"><div class="msg"></div><div class="dls"></div><pre hidden></pre></div>
+    </section>
+
+    <!-- 2 音视频转文档 -->
+    <section class="card" data-kind="transcribe">
+      <h2><span class="ico">📄</span>音视频转文档</h2>
+      <p class="desc">识别其中的语音，产出 TXT / 时间轴 Markdown / Word 三份文档。</p>
+      <div class="drop" data-accept="video/*,audio/*">点击或拖入音视频文件<span class="fname"></span></div>
+      <div class="opts">
+        <label>语言 <select data-opt="language">
+          <option value="auto">自动</option><option value="zh">中文</option><option value="en">英文</option><option value="ja">日文</option>
+        </select></label>
+      </div>
+      <button class="btn run" disabled>开始转写</button>
+      <div class="prog"><div class="bar"><i></i></div><div class="pmsg"></div></div>
+      <div class="result"><div class="msg"></div><div class="dls"></div><pre hidden></pre></div>
+    </section>
+
+    <!-- 3 语音转文字 -->
+    <section class="card" data-kind="stt">
+      <h2><span class="ico">🎙️</span>语音转文字</h2>
+      <p class="desc">上传录音，本地大模型离线识别成文字，可复制。</p>
+      <div class="drop" data-accept="audio/*,video/*">点击或拖入语音文件<span class="fname"></span></div>
+      <div class="opts">
+        <label>语言 <select data-opt="language">
+          <option value="auto">自动</option><option value="zh">中文</option><option value="en">英文</option><option value="ja">日文</option>
+        </select></label>
+      </div>
+      <button class="btn run" disabled>开始识别</button>
+      <div class="prog"><div class="bar"><i></i></div><div class="pmsg"></div></div>
+      <div class="result"><div class="msg"></div><div class="dls"></div><pre hidden></pre></div>
+    </section>
+
+    <!-- 4 文字转语音 -->
+    <section class="card" data-kind="tts">
+      <h2><span class="ico">🔊</span>文字转语音</h2>
+      <p class="desc">输入文字，多音色朗读合成 MP3，可在线试听。</p>
+      <textarea data-opt="text" placeholder="输入要朗读的文字（≤8000 字）…"></textarea>
+      <div class="opts">
+        <label>音色 <select data-opt="voice"></select></label>
+        <label>语速 <input type="number" data-opt="rate" value="0" min="-50" max="50" step="5" style="width:64px"> %</label>
+      </div>
+      <button class="btn run">开始合成</button>
+      <div class="prog"><div class="bar"><i></i></div><div class="pmsg"></div></div>
+      <div class="result"><div class="msg"></div><div class="dls"></div><pre hidden></pre></div>
+    </section>
+
+    <!-- 5 Word 转 PDF -->
+    <section class="card" data-kind="docx2pdf">
+      <h2><span class="ico">📑</span>Word 转 PDF</h2>
+      <p class="desc">docx 文档转成版式固定的 PDF，无需安装 Office。</p>
+      <div class="drop" data-accept=".docx">点击或拖入 .docx 文件<span class="fname"></span></div>
+      <button class="btn run" disabled>开始转换</button>
+      <div class="prog"><div class="bar"><i></i></div><div class="pmsg"></div></div>
+      <div class="result"><div class="msg"></div><div class="dls"></div><pre hidden></pre></div>
+    </section>
+
+    <!-- 6 PDF 转 Word -->
+    <section class="card" data-kind="pdf2docx">
+      <h2><span class="ico">📝</span>PDF 转 Word</h2>
+      <p class="desc">把 PDF 版面解析还原成可编辑的 docx 文档。</p>
+      <div class="drop" data-accept=".pdf">点击或拖入 .pdf 文件<span class="fname"></span></div>
+      <button class="btn run" disabled>开始转换</button>
+      <div class="prog"><div class="bar"><i></i></div><div class="pmsg"></div></div>
+      <div class="result"><div class="msg"></div><div class="dls"></div><pre hidden></pre></div>
+    </section>
+
+    <!-- 7 图片文字识别 -->
+    <section class="card" data-kind="ocr">
+      <h2><span class="ico">🔍</span>图片文字识别</h2>
+      <p class="desc">识别截图 / 照片中的中英文文字，离线 OCR。</p>
+      <div class="drop" data-accept="image/*">点击或拖入图片<span class="fname"></span></div>
+      <button class="btn run" disabled>开始识别</button>
+      <div class="prog"><div class="bar"><i></i></div><div class="pmsg"></div></div>
+      <div class="result"><div class="msg"></div><div class="dls"></div><pre hidden></pre></div>
+    </section>
+
+    <!-- 8 文字翻译 -->
+    <section class="card" data-kind="translate">
+      <h2><span class="ico">🌐</span>文字翻译</h2>
+      <p class="desc">中英日韩法德俄西互译，保留原文换行格式。</p>
+      <textarea data-opt="text" placeholder="输入要翻译的文字…"></textarea>
+      <div class="opts"><label>译为 <select data-opt="target"></select></label></div>
+      <button class="btn run">开始翻译</button>
+      <div class="prog"><div class="bar"><i></i></div><div class="pmsg"></div></div>
+      <div class="result"><div class="msg"></div><div class="dls"></div><pre hidden></pre></div>
+    </section>
+
+    <!-- 9 YouTube 视频转文字 -->
+    <section class="card" data-kind="yt-transcript">
+      <h2><span class="ico">📺</span>YouTube 转文字</h2>
+      <p class="desc">粘贴视频链接抓取字幕，产出完整文稿 + AI 总结版。</p>
+      <input type="url" data-opt="url" placeholder="https://www.youtube.com/watch?v=… 或 youtu.be/…" spellcheck="false">
+      <div class="opts">
+        <label>字幕 <select data-opt="lang">
+          <option value="">自动（优先中文）</option><option value="zh-Hans">简体中文</option>
+          <option value="zh-Hant">繁體中文</option><option value="en">English</option>
+          <option value="ja">日本語</option><option value="ko">한국어</option>
+        </select></label>
+        <label style="display:flex;align-items:center;gap:4px"><input type="checkbox" data-opt="summary" checked> AI 总结</label>
+      </div>
+      <button class="btn run">开始提取</button>
+      <div class="prog"><div class="bar"><i></i></div><div class="pmsg"></div></div>
+      <div class="result"><div class="msg"></div><div class="dls"></div><pre hidden></pre></div>
+    </section>
+
+    <!-- 10 语音翻译 -->
+    <section class="card" data-kind="speech-translate">
+      <h2><span class="ico">🗣️</span>语音翻译</h2>
+      <p class="desc">上传语音，先识别原文再翻译成目标语言文字。</p>
+      <div class="drop" data-accept="audio/*,video/*">点击或拖入语音文件<span class="fname"></span></div>
+      <div class="opts"><label>译为 <select data-opt="target"></select></label></div>
+      <button class="btn run" disabled>开始翻译</button>
+      <div class="prog"><div class="bar"><i></i></div><div class="pmsg"></div></div>
+      <div class="result"><div class="msg"></div><div class="dls"></div><pre hidden></pre></div>
+    </section>
+
+    <!-- 11 视频剪辑 -->
+    <section class="card" data-kind="video-edit">
+      <h2><span class="ico">✂️</span>视频剪辑</h2>
+      <p class="desc">裁剪片段 · 压缩转码 · 合并多段 · 旋转翻转 · 封面帧 · 文字水印。</p>
+      <div class="drop" data-accept="video/*"><span class="dhint">点击或拖入视频</span><span class="fname"></span></div>
+      <ul class="filelist" hidden></ul>
+      <div class="opts">
+        <label>操作 <select data-opt="vop">
+          <option value="trim">裁剪片段</option>
+          <option value="compress">压缩转码</option>
+          <option value="merge">合并多段</option>
+          <option value="transform">旋转/翻转/静音</option>
+          <option value="cover">提取封面帧</option>
+          <option value="watermark">加文字水印</option>
+        </select></label>
+      </div>
+      <div class="vop-group" data-group="trim">
+        <label>起点 <input type="number" data-opt="start" min="0" step="0.1" value="0"> 秒</label>
+        <label>终点 <input type="number" data-opt="end" min="0.1" step="0.1" value="10"> 秒</label>
+      </div>
+      <div class="vop-group" data-group="compress" hidden>
+        <label>高度 <select data-opt="height">
+          <option value="0">原尺寸</option><option value="1080">1080p</option>
+          <option value="720" selected>720p</option><option value="480">480p</option>
+          <option value="360">360p</option>
+        </select></label>
+        <label>CRF <input type="number" data-opt="crf" min="18" max="40" value="28" style="width:60px"></label>
+        <label>输出 <select data-opt="out"><option value="mp4">MP4</option><option value="gif">GIF</option></select></label>
+      </div>
+      <div class="vop-group" data-group="merge" hidden>
+        <p class="hint">拖入或点选 2–10 个视频，按列表顺序合并（可单项删除）。</p>
+      </div>
+      <div class="vop-group" data-group="transform" hidden>
+        <label>旋转 <select data-opt="rotate">
+          <option value="0">不旋转</option><option value="90">90°</option>
+          <option value="180">180°</option><option value="270">270°</option>
+        </select></label>
+        <label>翻转 <select data-opt="flip">
+          <option value="none">无</option><option value="h">水平</option><option value="v">垂直</option>
+        </select></label>
+        <label class="chk"><input type="checkbox" data-opt="mute"> 去除音轨</label>
+      </div>
+      <div class="vop-group" data-group="cover" hidden>
+        <label>时间点 <input type="number" data-opt="t" min="0" step="0.1" value="0"> 秒</label>
+      </div>
+      <div class="vop-group" data-group="watermark" hidden>
+        <input type="text" data-opt="text" placeholder="水印文字（支持中文）" maxlength="100">
+        <label>位置 <select data-opt="pos">
+          <option value="tl">左上</option><option value="tc">上中</option><option value="tr">右上</option>
+          <option value="ml">左中</option><option value="mc">正中</option><option value="mr">右中</option>
+          <option value="bl">左下</option><option value="bc">下中</option><option value="br" selected>右下</option>
+        </select></label>
+        <label>不透明 <input type="range" data-opt="opacity" min="0.1" max="1" step="0.05" value="0.8"></label>
+        <label>字号 <input type="number" data-opt="size" min="12" max="200" value="36" style="width:60px"></label>
+      </div>
+      <button class="btn run" disabled>开始处理</button>
+      <div class="prog"><div class="bar"><i></i></div><div class="pmsg"></div></div>
+      <div class="result"><div class="msg"></div><div class="dls"></div><pre hidden></pre></div>
+    </section>
+
+    <!-- 12 图片编辑 -->
+    <section class="card wide" data-kind="image-edit">
+      <h2><span class="ico">🖼️</span>图片编辑</h2>
+      <p class="desc">画布上直接操作：拖框裁剪 / 马赛克、画笔涂鸦、点击落文字；旋转翻转立即生效。</p>
+      <div class="drop" data-accept="image/*">点击或拖入图片<span class="fname"></span></div>
+      <div class="iedit" hidden>
+        <div class="toolbar">
+          <button type="button" class="tbtn on" data-tool="crop">裁剪</button>
+          <button type="button" class="tbtn" data-tool="mosaic">马赛克</button>
+          <button type="button" class="tbtn" data-tool="pen">涂鸦</button>
+          <button type="button" class="tbtn" data-tool="text">文字</button>
+          <button type="button" class="tbtn act" data-act="rotate">↻ 90°</button>
+          <button type="button" class="tbtn act" data-act="fliph">左右翻</button>
+          <button type="button" class="tbtn act" data-act="flipv">上下翻</button>
+        </div>
+        <div class="toolbar">
+          <label>缩放 <input type="number" class="ie-scale" value="100" min="1" max="1000" step="10" style="width:64px"> %</label>
+          <button type="button" class="tbtn act" data-act="resize">应用缩放</button>
+          <label>颜色 <input type="color" class="ie-color" value="#ff3344"></label>
+          <label>线宽 <input type="number" class="ie-width" value="6" min="1" max="60" style="width:56px"></label>
+        </div>
+        <div class="toolbar">
+          <input type="text" class="ie-text" placeholder="水印文字（点画布落字）" maxlength="200">
+          <label>字号 <input type="number" class="ie-tsize" value="32" min="8" max="200" style="width:60px"></label>
+          <label>描边 <input type="number" class="ie-outline" value="2" min="0" max="10" style="width:52px"></label>
+        </div>
+        <canvas class="preview"></canvas>
+        <ul class="opslist"></ul>
+        <div class="toolbar">
+          <label>输出 <select class="ie-fmt">
+            <option value="jpg">JPG</option><option value="webp">WebP</option><option value="png">PNG</option>
+          </select></label>
+          <label>质量 <input type="range" class="ie-quality" min="1" max="100" value="85"> <span class="ie-qv">85</span></label>
+          <button type="button" class="tbtn act" data-act="clear">清空操作</button>
+        </div>
+      </div>
+      <button class="btn run" disabled>导出图片</button>
+      <div class="prog"><div class="bar"><i></i></div><div class="pmsg"></div></div>
+      <div class="result"><div class="msg"></div><div class="dls"></div><pre hidden></pre></div>
+    </section>
+
+    <!-- 13 视频翻译字幕 -->
+    <section class="card" data-kind="video-subtitle">
+      <h2><span class="ico">🈶</span>视频翻译字幕</h2>
+      <p class="desc">本地识别语音 → AI 逐句翻译，出双语对照 + 纯译文 + 原文三份 SRT。</p>
+      <div class="drop" data-accept="video/*,audio/*">点击或拖入视频/音频文件<span class="fname"></span></div>
+      <div class="opts">
+        <label>源语言 <select data-opt="source">
+          <option value="auto">自动识别</option><option value="ja">日语</option>
+          <option value="en">英语</option><option value="zh">中文</option>
+          <option value="ko">韩语</option>
+        </select></label>
+        <label>译为 <select data-opt="target" data-default="zh"></select></label>
+      </div>
+      <button class="btn run" disabled>生成字幕</button>
+      <div class="prog"><div class="bar"><i></i></div><div class="pmsg"></div></div>
+      <div class="result"><div class="msg"></div><div class="dls"></div><pre hidden></pre></div>
+    </section>
+
+  </main>
+
+  <footer class="foot">MEDIA TOOLBOX · 本地运行 · 数据不出机</footer>
+</div>
+
+<script src="/static/app.js?v=20261018d"></script>
+</body>
+</html>

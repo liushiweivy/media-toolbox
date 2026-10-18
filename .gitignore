@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.venv/
+# 本地产出与密钥（ark.key、临时音视频）
+data/
+# 外部二进制（yt-dlp.exe 自行下载放入）
+bin/
+# 本机一次性安装脚本（含个人桌面路径）
+tools/mk-*.py
